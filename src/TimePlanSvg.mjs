@@ -20,11 +20,13 @@ class TimePlanSvg {
 		this.default_toml = default_toml;
 		
 		this.font_size_title = 22;
+		this.font_size_header = 16;
 		this.font_size_normal = 14;
 		
 		this.css = `
-.title { font: bold ${this.font_size_title}px sans-serif; }
+.title { font: bolder ${this.font_size_title}px sans-serif; }
 .normal { font: normal ${this.font_size_normal}px sans-serif; }
+.header { font: bold ${this.font_size_header}px sans-serif; }
 `;
 		
 		this.renderer = null;
@@ -46,7 +48,6 @@ class TimePlanSvg {
 			true // pretty print - true for debugging
 		);
 		
-		this.render_skeleton(source);
 		
 		this.chart_pos = new Vector2(
 			source.style.margin_main + source.style.padding_main,
@@ -59,6 +60,21 @@ class TimePlanSvg {
 		this.renderer.addRectangle(this.chart_pos, this.chart_size, "#ffcc00");
 		
 		this.task_height = this.font_size_normal + source.style.padding_task*2;
+		this.chart_header_height = this.font_size_header + source.style.padding_header*2;
+		this.width_sidebar = this.chart_size.x * source.style.width_sidebar;
+		
+		this.chart_cell_count = source.task.reduce((prev, next) => Math.max(prev, next.start + next.duration), 0);
+		this.chart_graph_size = this.chart_size.clone().subtract(new Vector2(
+			this.width_sidebar,
+			this.chart_header_height
+		));
+		this.chart_cell_size = new Vector2(
+			this.chart_graph_size.x / this.chart_cell_count,
+			this.task_height
+		);
+		
+		this.render_skeleton(source);
+		this.render_chart_header(source);
 		
 		let i = 0;
 		for(let task of source.task) {
@@ -89,14 +105,72 @@ class TimePlanSvg {
 			source.title,
 			"title"
 		);
+		
+		let divider_start = this.chart_pos.clone().add(new Vector2(this.width_sidebar, 0));
+		this.renderer.addLine(
+			divider_start,
+			divider_start.clone().add(new Vector2(0, this.chart_size.y)),
+			source.style.divider_sidebar_colour,
+			source.style.divider_sidebar_width
+		);
+		
+		
 		// this.draw_debug(new Vector2(text_offset, text_offset));
 	}
 	
+	render_chart_header(source) {
+		this.renderer.addRectangle(
+			this.chart_pos,
+			new Vector2(this.chart_size.x, this.chart_header_height),
+			"none", 0,
+			source.style.bg_header_colour
+		);
+		
+		let header_inner_pos = this.chart_pos.clone().add(new Vector2(
+			source.style.padding_header,
+			source.style.padding_header
+		));
+		
+		this.renderer.addText(
+			header_inner_pos.clone().add(new Vector2(0, this.font_size_header)),
+			"Task",
+			"header"
+		);
+		
+		let next_pos = header_inner_pos.clone().add(new Vector2(
+			source.style.padding_cell_x + this.width_sidebar,
+			this.font_size_header
+		));
+		for(let i = 0; i < this.chart_cell_count; i++) {
+			if(i > 0) {
+				let line_start = new Vector2(
+					this.chart_pos.x + this.width_sidebar + this.chart_cell_size.x*i,
+					this.chart_pos.y
+				);
+				let is_minor = i % source.style.divider_major_interval == 0;
+				this.renderer.addLine(
+					line_start,
+					line_start.clone().add(new Vector2(0, this.chart_size.y)),
+					is_minor ? source.style.divider_major_colour : source.style.divider_minor_colour,
+					is_minor ? source.style.divider_major_width : source.style.divider_minor_width
+				);
+			}
+			
+			this.renderer.addText(
+				next_pos,
+				`${i + 1}`,
+				"header"
+			);
+			next_pos.x += this.chart_cell_size.x;
+		}
+	}
+	
 	render_task(source, task, index) {
-		let offset_y = this.task_height * index; // Relative to this.chart_pos.y
+		// Relative to this.chart_pos.y
+		let offset_y = this.task_height * index + this.chart_header_height;
 		this.renderer.addRectangle(
 			this.chart_pos.clone().add(new Vector2(0, offset_y)),
-			new Vector2(this.chart_size.x, this.task_height),
+			new Vector2(this.width_sidebar, this.task_height),
 			"none", 0,
 			index % 2 == 0 ? source.style.bg_task_colour : source.style.bg_task_colour_alternate
 		);

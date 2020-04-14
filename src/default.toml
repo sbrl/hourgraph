@@ -7,18 +7,29 @@ title = "Time Plan"
 
 [style]
 # All of these are optional
-font_colour = "#333333"
-divider_minor_colour = "#cccccc"
+font_colour = "hsla(0, 0%, 10%, 0.5)"
+divider_minor_colour = "hsla(0, 0%, 75%, 0.5)"
 
 divider_minor_width = 2 # Pixels
-divider_major_colour = "#aaaaaa"
+divider_major_colour = "hsla(0, 0%, 60%, 0.5)"
 divider_major_width = 5 # Pixels
+divider_major_interval = 4
+
+divider_sidebar_colour = "hsla(0, 0%, 50%, 0.5)"
+divider_sidebar_width = 3
 
 margin_main = 25
 padding_main = 25
 margin_title_bottom = 25
 
 padding_task = 10
+padding_header = 10
 
-bg_task_colour = "rgba(200, 200, 200, 0.5)"
-bg_task_colour_alternate = "rgba(200, 200, 200, 0.25)"
+padding_cell_x = 5
+
+# Percentage of the available width of the *chart* (not the entire image) that should be used to display the task sidebar on the left-hand-side.
+width_sidebar = 0.2
+
+bg_header_colour = "hsla(0, 0%, 65%, 0.5)"
+bg_task_colour = "hsla(0, 0%, 80%, 0.5)"
+bg_task_colour_alternate = "hsla(0, 0%, 80%, 0.25)"

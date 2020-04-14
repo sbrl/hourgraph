@@ -19,7 +19,7 @@ class SvgWriter {
 	 * @param	{Rectangle}	[viewBox=null]
 	 */
 	constructor(widthspec = "100%", heightspec = "100%", viewBox = null, pretty_print = false) {
-		this.unitSuffix = "";
+		this.unit_suffix = "";
 		
 		// ----------------------------------
 		
@@ -97,10 +97,10 @@ class SvgWriter {
 	 */
 	addLine(start, end, strokeStyle = "darkgreen", strokeWidth = 3) {
 		this.xml.startElement("line");
-		this.xml.writeAttribute("x1", `${start.X}${UnitSuffix}`);
-		this.xml.writeAttribute("y1", `${start.Y}${UnitSuffix}`);
-		this.xml.writeAttribute("x2", `${end.X}${UnitSuffix}`);
-		this.xml.writeAttribute("y2", `${end.Y}${UnitSuffix}`);
+		this.xml.writeAttribute("x1", `${start.x}${this.unit_suffix}`);
+		this.xml.writeAttribute("y1", `${start.y}${this.unit_suffix}`);
+		this.xml.writeAttribute("x2", `${end.x}${this.unit_suffix}`);
+		this.xml.writeAttribute("y2", `${end.y}${this.unit_suffix}`);
 		this.xml.writeAttribute("stroke", strokeStyle);
 		this.xml.writeAttribute("stroke-width", strokeWidth.toString());
 		this.xml.endElement();
@@ -164,10 +164,10 @@ class SvgWriter {
 	 */
 	addRectangle(position, size, strokeStyle = "red", strokeWidth = 3, fill = "none") {
 		this.xml.startElement("rect");
-		this.xml.writeAttribute("x", `${position.x}${this.unitSuffix}`);
-		this.xml.writeAttribute("y", `${position.y}${this.unitSuffix}`);
-		this.xml.writeAttribute("width", `${size.x}${this.unitSuffix}`);
-		this.xml.writeAttribute("height", `${size.y}${this.unitSuffix}`);
+		this.xml.writeAttribute("x", `${position.x}${this.unit_suffix}`);
+		this.xml.writeAttribute("y", `${position.y}${this.unit_suffix}`);
+		this.xml.writeAttribute("width", `${size.x}${this.unit_suffix}`);
+		this.xml.writeAttribute("height", `${size.y}${this.unit_suffix}`);
 		this.xml.writeAttribute("fill", fill);
 		this.xml.writeAttribute("stroke", strokeStyle);
 		this.xml.writeAttribute("stroke-width", strokeWidth.toString());
@@ -183,9 +183,9 @@ class SvgWriter {
 	 */
 	addCircle(centre, radius, fillStyle = "blue") {
 		this.xml.startElement("circle");
-		this.xml.writeAttribute("cx", `${centre.x}${this.unitSuffix}`);
-		this.xml.writeAttribute("cy", `${centre.y}${this.unitSuffix}`);
-		this.xml.writeAttribute("r", `${radius}${this.unitSuffix}`);
+		this.xml.writeAttribute("cx", `${centre.x}${this.unit_suffix}`);
+		this.xml.writeAttribute("cy", `${centre.y}${this.unit_suffix}`);
+		this.xml.writeAttribute("r", `${radius}${this.unit_suffix}`);
 		this.xml.writeAttribute("fill", fillStyle);
 		this.xml.endElement();
 		return this;
