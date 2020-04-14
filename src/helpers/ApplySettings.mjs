@@ -15,9 +15,9 @@ function apply_settings(def, custom) {
     for(let key in custom) {
 		// If the property isn't an object, then it's probably a setting
         // We should overwrite the existing default setting with the custom one.
-        if(typeof custom[key] != "object")
+        if(typeof custom[key] != "object" || typeof def[key] == "undefined")
             def[key] = custom[key];
-        else // It's an object! We should recurse over it.
+		else // It's an object! We should recurse over it - but only if then default equivalent also exists.
             apply_settings(def[key], custom[key]);
     }
 }

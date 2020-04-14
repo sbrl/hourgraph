@@ -58,7 +58,15 @@ class TimePlanSvg {
 		);
 		this.renderer.addRectangle(this.chart_pos, this.chart_size, "#ffcc00");
 		
-		this.draw_debug(chart_pos);
+		this.task_height = this.font_size_normal + source.style.padding_task*2;
+		
+		let i = 0;
+		for(let task of source.task) {
+			this.render_task(source, task, i);
+			i++;
+		}
+		
+		this.draw_debug(this.chart_pos);
 		
 		this.renderer.complete();
 		return this.renderer.toString();
@@ -84,8 +92,23 @@ class TimePlanSvg {
 		// this.draw_debug(new Vector2(text_offset, text_offset));
 	}
 	
-	render_task(task, index) {
-		this
+	render_task(source, task, index) {
+		let offset_y = this.task_height * index; // Relative to this.chart_pos.y
+		this.renderer.addRectangle(
+			this.chart_pos.clone().add(new Vector2(0, offset_y)),
+			new Vector2(this.chart_size.x, this.task_height),
+			"none", 0,
+			index % 2 == 0 ? source.style.bg_task_colour : source.style.bg_task_colour_alternate
+		);
+		
+		this.renderer.addText(
+			this.chart_pos.clone().add(new Vector2(
+				source.style.padding_task,
+				source.style.padding_task + this.font_size_normal + offset_y
+			)),
+			task.name,
+			"normal"
+		);
 	}
 	
 	draw_debug(pos) {

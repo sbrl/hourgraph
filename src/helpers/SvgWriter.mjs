@@ -60,6 +60,8 @@ class SvgWriter {
 	 * Adds some text to the image.
 	 * @param	{Vector2}	position	The position to display the text at.
 	 * @param	{string}	text		The text to display.
+	 * @param	{string|string[]}	classes	A list of classes that the text element should have. Useful for applying CSS - see SvgWriter.addCSS(str)
+	 * @return {this}
 	 */
 	addText(position, text, classes = []) {
 		let class_str = typeof classes == "string" ? classes : classes.join(" ");
@@ -76,6 +78,7 @@ class SvgWriter {
 	 * Adds some custom CSS.
 	 * Useful for drawing text.
 	 * @param {string} str The string of CSS to add.
+	 * @return {this}
 	 */
 	addCSS(str) {
 		this.xml.startElement("style")
@@ -90,6 +93,7 @@ class SvgWriter {
 	 * @param	{Vector2}	end							The end position of the line.
 	 * @param	{String}	[strokeStyle="darkgreen"]	The colour to draw the line.
 	 * @param	{Number}	[strokeWidth=3]				The width to draw the line.
+	 * @return {this}
 	 */
 	addLine(start, end, strokeStyle = "darkgreen", strokeWidth = 3) {
 		this.xml.startElement("line");

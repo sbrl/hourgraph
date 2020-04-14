@@ -17,3 +17,8 @@ divider_major_width = 5 # Pixels
 margin_main = 25
 padding_main = 25
 margin_title_bottom = 25
+
+padding_task = 10
+
+bg_task_colour = "rgba(200, 200, 200, 0.5)"
+bg_task_colour_alternate = "rgba(200, 200, 200, 0.25)"
