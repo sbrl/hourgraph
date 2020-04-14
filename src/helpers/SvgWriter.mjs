@@ -4,6 +4,7 @@ import XMLWriter from 'xml-writer';
 
 import Rectangle from './Rectangle.mjs';
 import Vector2 from './Vector2.mjs';
+import { colour2style } from './ColourHelpers.mjs';
 
 /*
  * Simplifies the process for creating an SVG dynamically.
@@ -101,8 +102,9 @@ class SvgWriter {
 		this.xml.writeAttribute("y1", `${start.y}${this.unit_suffix}`);
 		this.xml.writeAttribute("x2", `${end.x}${this.unit_suffix}`);
 		this.xml.writeAttribute("y2", `${end.y}${this.unit_suffix}`);
-		this.xml.writeAttribute("stroke", strokeStyle);
-		this.xml.writeAttribute("stroke-width", strokeWidth.toString());
+		this.xml.writeAttribute("style", `${colour2style(strokeStyle, "stroke")}stroke-width: ${strokeWidth}`);
+		// this.xml.writeAttribute("stroke", strokeStyle);
+		// this.xml.writeAttribute("stroke-width", strokeWidth.toString());
 		this.xml.endElement();
 		return this;
 	}
@@ -168,9 +170,10 @@ class SvgWriter {
 		this.xml.writeAttribute("y", `${position.y}${this.unit_suffix}`);
 		this.xml.writeAttribute("width", `${size.x}${this.unit_suffix}`);
 		this.xml.writeAttribute("height", `${size.y}${this.unit_suffix}`);
-		this.xml.writeAttribute("fill", fill);
-		this.xml.writeAttribute("stroke", strokeStyle);
-		this.xml.writeAttribute("stroke-width", strokeWidth.toString());
+		this.xml.writeAttribute("style", `${colour2style(strokeStyle, "stroke")}stroke-width: ${strokeWidth};${colour2style(fill)}`);
+		// this.xml.writeAttribute("fill", fill);
+		// this.xml.writeAttribute("stroke", strokeStyle);
+		// this.xml.writeAttribute("stroke-width", strokeWidth.toString());
 		this.xml.endElement();
 		return this;
 	}
@@ -186,7 +189,8 @@ class SvgWriter {
 		this.xml.writeAttribute("cx", `${centre.x}${this.unit_suffix}`);
 		this.xml.writeAttribute("cy", `${centre.y}${this.unit_suffix}`);
 		this.xml.writeAttribute("r", `${radius}${this.unit_suffix}`);
-		this.xml.writeAttribute("fill", fillStyle);
+		this.xml.writeAttribute("style", colour2style(fill));
+		// this.xml.writeAttribute("fill", fillStyle);
 		this.xml.endElement();
 		return this;
 	}
@@ -199,7 +203,8 @@ class SvgWriter {
 	 */
 	addPolygon(fillStyle, points) {
 		this.xml.startElement("polygon");
-		this.xml.writeAttribute("fill", fillStyle);
+		this.xml.writeAttribute("style", colour2style(fill));
+		// this.xml.writeAttribute("fill", fillStyle);
 		this.xml.writeAttribute(
 			"points",
 			points.map((point) => `${point.x},${point.y}`).join(" ")
