@@ -16,3 +16,4 @@ divider_major_width = 5 # Pixels
 
 margin_main = 25
 padding_main = 25
+margin_title_bottom = 25

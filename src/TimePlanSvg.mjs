@@ -26,6 +26,8 @@ class TimePlanSvg {
 .title { font: bold ${this.font_size_title}px sans-serif; }
 .normal { font: normal ${this.font_size_normal}px sans-serif; }
 `;
+		
+		this.renderer = null;
 	}
 	
 	apply_defaults(source) {
@@ -38,22 +40,34 @@ class TimePlanSvg {
 		let source = this.apply_defaults(TOML.parse(source_str));
 		console.error(`Rendering for`, source);
 		
-		let result = new SvgWriter(
+		this.renderer = new SvgWriter(
 			`${source.width}px`, `${source.height}px`,
 			new Rectangle(0, 0, source.width, source.height),
 			true // pretty print - true for debugging
 		);
 		
-		this.render_skeleton(source, result);
+		this.render_skeleton(source);
 		
-		result.complete();
-		return result.toString();
+		this.chart_pos = new Vector2(
+			source.style.margin_main + source.style.padding_main,
+			source.style.margin_main + source.style.padding_main + this.font_size_title + source.style.margin_title_bottom,
+		);
+		this.chart_size = new Vector2(
+			source.width - (source.style.margin_main*2 + source.style.padding_main*2),
+			source.height - (source.style.margin_main*2 + source.style.padding_main*2 + this.font_size_title + source.style.margin_title_bottom)
+		);
+		this.renderer.addRectangle(this.chart_pos, this.chart_size, "#ffcc00");
+		
+		this.draw_debug(chart_pos);
+		
+		this.renderer.complete();
+		return this.renderer.toString();
 	}
 	
-	render_skeleton(source, result) {
-		result.addCSS(this.css);
+	render_skeleton(source) {
+		this.renderer.addCSS(this.css);
 		
-		result.addRectangle(
+		this.renderer.addRectangle(
 			new Vector2(source.style.margin_main, source.style.margin_main),
 			new Vector2(
 				source.width - source.style.margin_main*2,
@@ -61,17 +75,25 @@ class TimePlanSvg {
 			)
 		);
 		let text_offset = source.style.margin_main + source.style.padding_main;
-		result.addText(
+		this.renderer.addText(
 			// The origin of text is the bottom left, apparently
 			new Vector2(text_offset, text_offset + this.font_size_title),
 			source.title,
 			"title"
 		);
-		// result.addRectangle(
-		// 	new Vector2(text_offset, text_offset),
-		// 	new Vector2(5, 5),
-		// 	"red", 0, "blue"
-		// );
+		// this.draw_debug(new Vector2(text_offset, text_offset));
+	}
+	
+	render_task(task, index) {
+		this
+	}
+	
+	draw_debug(pos) {
+		this.renderer.addRectangle(
+			pos,
+			new Vector2(5, 5),
+			"none", 0, "blue"
+		);
 	}
 }
 
