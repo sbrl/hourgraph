@@ -1,0 +1,19 @@
+{
+  "name": "time-plan-svg",
+  "version": "1.0.0",
+  "description": "Time plan / gantt chart SVG generator",
+  "main": "src/index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sbrl/time-plan-svg.git"
+  },
+  "author": "Starbeamrainbowlabs",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/sbrl/time-plan-svg/issues"
+  },
+  "homepage": "https://github.com/sbrl/time-plan-svg#readme"
+}
