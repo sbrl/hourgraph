@@ -28,6 +28,7 @@ class TimePlanSvg {
 	
 	render(source_str) {
 		let source = this.apply_defaults(TOML.parse(source_str));
+		console.error(`Rendering for`, source);
 		
 		let result = new SvgWriter(
 			`${source.width}px`, `${source.height}px`,
@@ -42,6 +43,10 @@ class TimePlanSvg {
 	}
 	
 	render_skeleton(source, result) {
+		console.error(new Vector2(
+			source.width - source.style.border_main*2,
+			source.height - source.style.border_main*2
+		));
 		result.addRectangle(
 			new Vector2(source.style.border_main, source.style.border_main),
 			new Vector2(

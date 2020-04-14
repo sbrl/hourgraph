@@ -133,8 +133,8 @@ class SvgWriter {
 		this.xml.startElement("rect");
 		this.xml.writeAttribute("x", `${position.x}${this.unitSuffix}`);
 		this.xml.writeAttribute("y", `${position.y}${this.unitSuffix}`);
-		this.xml.writeAttribute("width", `${size.X}${this.unitSuffix}`);
-		this.xml.writeAttribute("height", `${size.Y}${this.unitSuffix}`);
+		this.xml.writeAttribute("width", `${size.x}${this.unitSuffix}`);
+		this.xml.writeAttribute("height", `${size.y}${this.unitSuffix}`);
 		this.xml.writeAttribute("fill", "none");
 		this.xml.writeAttribute("stroke", strokeStyle);
 		this.xml.writeAttribute("stroke-width", strokeWidth.toString());
