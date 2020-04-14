@@ -32,6 +32,7 @@ class SvgWriter {
 		this.xml.writeAttribute("version", "1.1");
 		this.xml.writeAttribute("width", widthspec);
 		this.xml.writeAttribute("height", heightspec);
+		this.xml.writeAttribute("xmlns", "http://www.w3.org/2000/svg");
 
 		if (viewBox != null) {
 			this.xml.writeAttribute(
