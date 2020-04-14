@@ -184,7 +184,7 @@ class TimePlanSvg {
 			
 			this.renderer.addText(
 				next_pos,
-				`${i + 1}`,
+				`${i + source.time_label_offset}`,
 				"header"
 			);
 			

@@ -2,6 +2,7 @@ width = 1920
 height = 1080
 
 time_interval = "Days"
+time_label_offset = 1
 
 title = "Time Plan"
 
