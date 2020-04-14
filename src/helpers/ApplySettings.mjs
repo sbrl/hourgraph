@@ -7,9 +7,13 @@
  * @param  {object} custom The settings to use when overwriting.
  */
 function apply_settings(def, custom) {
+	// If the default doesn't exist, then return the custom
+	if(typeof def == "undefined")
+		return custom;
+	
     // Loop over each of the custom settings
     for(let key in custom) {
-        // If the property isn't an object, then it's probably a setting
+		// If the property isn't an object, then it's probably a setting
         // We should overwrite the existing default setting with the custom one.
         if(typeof custom[key] != "object")
             def[key] = custom[key];
