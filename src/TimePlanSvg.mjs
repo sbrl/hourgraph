@@ -12,7 +12,10 @@ import apply_settings from './helpers/ApplySettings.mjs';
  * @param	default_toml	{string}	The string of default TOML to apply. This should come from default.toml in this directory, but this isn't done automatically in order to keep the generator itself environment-agnostic.
  */
 class TimePlanSvg {
-	constructor(default_toml = "") {
+	constructor(default_toml = null) {
+		if(default_toml == null)
+			throw new Error("Error: No default TOML string passed.");
+		
 		// Note that we store this as a string here 'cause we might need multiple independent copies if we're parsing more than 1 source string
 		this.default_toml = default_toml;
 	}

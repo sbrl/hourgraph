@@ -28,12 +28,12 @@ export default async function() {
     let input = null;
     switch(args.input) {
         case "-":
-            input = fs.readFileSync(0, "utf-8");
+            input = await fs.promises.readFile(0, "utf-8");
             break;
         default:
             if(!fs.existsSync(args.input))
                 break;
-            input = fs.readFileSync(args.input, "utf-8");
+            input = await fs.promises.readFile(args.input, "utf-8");
             break;
     }
     if(input == null) {
@@ -41,7 +41,9 @@ export default async function() {
         process.exit(1);
     }
     
-    let renderer = new TimePlanSvg();
+    let renderer = new TimePlanSvg(
+        await fs.promises.readFile(path.resolve(__dirname, "../default.toml"), "utf-8")
+    );
     let output = renderer.render(input);
     
     if(typeof output != "string") {
