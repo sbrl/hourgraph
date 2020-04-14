@@ -6,6 +6,7 @@ import SvgWriter from './helpers/SvgWriter.mjs';
 import Vector2 from './helpers/Vector2.mjs';
 import Rectangle from './helpers/Rectangle.mjs';
 import apply_settings from './helpers/ApplySettings.mjs';
+import { colour_normalise } from './helpers/ColourHelpers.mjs';
 
 /**
  * Renders a time plan as an SVG.
@@ -98,7 +99,7 @@ class TimePlanSvg {
 				source.width - source.style.margin_main*2,
 				source.height - source.style.margin_main*2
 			),
-			source.style.border_main_colour,
+			colour_normalise(source.style.border_main_colour),
 			source.style.border_main_width
 		);
 		let text_offset = source.style.margin_main + source.style.padding_main;
@@ -117,7 +118,7 @@ class TimePlanSvg {
 			this.chart_pos,
 			new Vector2(this.width_sidebar / 2, this.chart_header_height),
 			"none", 0,
-			source.style.bg_sidebar_colour
+			colour_normalise(source.style.bg_sidebar_colour)
 		);
 		
 		let header_inner_pos = this.chart_pos.clone().add(new Vector2(
@@ -137,7 +138,7 @@ class TimePlanSvg {
 			sidebar_right_start,
 			new Vector2(this.width_sidebar / 2, this.chart_header_height),
 			"none", 0,
-			source.style.bg_sidebar_right_colour
+			colour_normalise(source.style.bg_sidebar_right_colour)
 		);
 		
 		// Time interval text
@@ -152,14 +153,14 @@ class TimePlanSvg {
 			this.chart_pos.clone().add(new Vector2(this.width_sidebar, 0)),
 			new Vector2(this.chart_size.x - this.width_sidebar, this.chart_header_height),
 			"none", 0,
-			source.style.bg_header_cells_colour
+			colour_normalise(source.style.bg_header_cells_colour)
 		);
 		
 		let divider_start = this.chart_pos.clone().add(new Vector2(this.width_sidebar, 0));
 		this.renderer.addLine(
 			divider_start,
 			divider_start.clone().add(new Vector2(0, this.chart_size.y)),
-			source.style.divider_sidebar_colour,
+			colour_normalise(source.style.divider_sidebar_colour),
 			source.style.divider_sidebar_width
 		);
 		
@@ -177,7 +178,7 @@ class TimePlanSvg {
 				this.renderer.addLine(
 					line_start,
 					line_start.clone().add(new Vector2(0, this.chart_size.y)),
-					is_minor ? source.style.divider_major_colour : source.style.divider_minor_colour,
+					colour_normalise(is_minor ? source.style.divider_major_colour : source.style.divider_minor_colour),
 					is_minor ? source.style.divider_major_width : source.style.divider_minor_width
 				);
 			}
@@ -201,7 +202,7 @@ class TimePlanSvg {
 			this.chart_pos.clone().add(new Vector2(0, offset_y)),
 			new Vector2(this.width_sidebar, this.task_height),
 			"none", 0,
-			index % 2 == 0 ? source.style.bg_task_colour : source.style.bg_task_colour_alternate
+			colour_normalise(index % 2 == 0 ? source.style.bg_task_colour : source.style.bg_task_colour_alternate)
 		);
 		
 		// Task name
@@ -228,9 +229,9 @@ class TimePlanSvg {
 				task.duration * this.chart_cell_size.x,
 				this.task_height * source.style.task_bar_height
 			),
-			source.style.task_bar_border_colour,
+			colour_normalise(source.style.task_bar_border_colour),
 			source.style.task_bar_border_width,
-			task.colour || source.style.task_bar_colour
+			colour_normalise(task.colour || source.style.task_bar_colour)
 		);
 		
 		// Ghost bar
@@ -246,9 +247,9 @@ class TimePlanSvg {
 				task.start * this.chart_cell_size.x,
 				this.task_height * source.style.task_bar_ghost_height
 			),
-			source.style.task_bar_ghost_border_colour,
+			colour_normalise(source.style.task_bar_ghost_border_colour),
 			source.style.task_bar_ghost_border_width,
-			task.ghost_colour || source.style.task_bar_ghost_colour
+			colour_normalise(task.ghost_colour || source.style.task_bar_ghost_colour)
 		);
 	}
 	
