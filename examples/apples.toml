@@ -1,4 +1,4 @@
-width = 1000
+width = 1500
 height = 480
 
 [[task]]
@@ -14,4 +14,26 @@ duration = 2
 [[task]]
 name = "Enjoy!"
 start = 4
+duration = 4
+colour = "hsl(46, 90%, 60%)"
+ghost_colour = "hsla(46, 90%, 60%, 0.1)"
+
+[[task]]
+name = "Yay"
+start = 1
+duration = 6
+
+[[task]]
+name = "Yay"
+start = 8
+duration = 4
+
+[[task]]
+name = "Yay"
+start = 10
+duration = 4
+
+[[task]]
+name = "Yay"
+start = 14
 duration = 4

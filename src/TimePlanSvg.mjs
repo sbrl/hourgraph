@@ -57,7 +57,6 @@ class TimePlanSvg {
 			source.width - (source.style.margin_main*2 + source.style.padding_main*2),
 			source.height - (source.style.margin_main*2 + source.style.padding_main*2 + this.font_size_title + source.style.margin_title_bottom)
 		);
-		this.renderer.addRectangle(this.chart_pos, this.chart_size, "#ffcc00");
 		
 		this.task_height = this.font_size_normal + source.style.padding_task*2;
 		this.chart_header_height = this.font_size_header + source.style.padding_header*2;
@@ -82,7 +81,9 @@ class TimePlanSvg {
 			i++;
 		}
 		
-		this.draw_debug(this.chart_pos);
+		this.renderer.addRectangle(this.chart_pos, this.chart_size, "#ffcc00");
+		
+		// this.draw_debug(this.chart_pos);
 		
 		this.renderer.complete();
 		return this.renderer.toString();
@@ -96,7 +97,9 @@ class TimePlanSvg {
 			new Vector2(
 				source.width - source.style.margin_main*2,
 				source.height - source.style.margin_main*2
-			)
+			),
+			source.style.border_main_colour,
+			source.style.border_main_width
 		);
 		let text_offset = source.style.margin_main + source.style.padding_main;
 		this.renderer.addText(
@@ -106,24 +109,15 @@ class TimePlanSvg {
 			"title"
 		);
 		
-		let divider_start = this.chart_pos.clone().add(new Vector2(this.width_sidebar, 0));
-		this.renderer.addLine(
-			divider_start,
-			divider_start.clone().add(new Vector2(0, this.chart_size.y)),
-			source.style.divider_sidebar_colour,
-			source.style.divider_sidebar_width
-		);
-		
-		
 		// this.draw_debug(new Vector2(text_offset, text_offset));
 	}
 	
 	render_chart_header(source) {
 		this.renderer.addRectangle(
 			this.chart_pos,
-			new Vector2(this.chart_size.x, this.chart_header_height),
+			new Vector2(this.width_sidebar / 2, this.chart_header_height),
 			"none", 0,
-			source.style.bg_header_colour
+			source.style.bg_sidebar_colour
 		);
 		
 		let header_inner_pos = this.chart_pos.clone().add(new Vector2(
@@ -135,6 +129,38 @@ class TimePlanSvg {
 			header_inner_pos.clone().add(new Vector2(0, this.font_size_header)),
 			"Task",
 			"header"
+		);
+		
+		// Time interval bg
+		let sidebar_right_start = this.chart_pos.clone().add(new Vector2(this.width_sidebar / 2, 0));
+		this.renderer.addRectangle(
+			sidebar_right_start,
+			new Vector2(this.width_sidebar / 2, this.chart_header_height),
+			"none", 0,
+			source.style.bg_sidebar_right_colour
+		);
+		
+		// Time interval text
+		this.renderer.addText(
+			sidebar_right_start.clone().add(new Vector2(source.style.padding_header, source.style.padding_header + this.font_size_header)),
+			source.time_interval,
+			"header"
+		)
+		
+		// Cell text background
+		this.renderer.addRectangle(
+			this.chart_pos.clone().add(new Vector2(this.width_sidebar, 0)),
+			new Vector2(this.chart_size.x - this.width_sidebar, this.chart_header_height),
+			"none", 0,
+			source.style.bg_header_cells_colour
+		);
+		
+		let divider_start = this.chart_pos.clone().add(new Vector2(this.width_sidebar, 0));
+		this.renderer.addLine(
+			divider_start,
+			divider_start.clone().add(new Vector2(0, this.chart_size.y)),
+			source.style.divider_sidebar_colour,
+			source.style.divider_sidebar_width
 		);
 		
 		let next_pos = header_inner_pos.clone().add(new Vector2(
@@ -161,6 +187,7 @@ class TimePlanSvg {
 				`${i + 1}`,
 				"header"
 			);
+			
 			next_pos.x += this.chart_cell_size.x;
 		}
 	}
@@ -168,6 +195,8 @@ class TimePlanSvg {
 	render_task(source, task, index) {
 		// Relative to this.chart_pos.y
 		let offset_y = this.task_height * index + this.chart_header_height;
+		
+		// Background
 		this.renderer.addRectangle(
 			this.chart_pos.clone().add(new Vector2(0, offset_y)),
 			new Vector2(this.width_sidebar, this.task_height),
@@ -175,6 +204,7 @@ class TimePlanSvg {
 			index % 2 == 0 ? source.style.bg_task_colour : source.style.bg_task_colour_alternate
 		);
 		
+		// Task name
 		this.renderer.addText(
 			this.chart_pos.clone().add(new Vector2(
 				source.style.padding_task,
@@ -182,6 +212,43 @@ class TimePlanSvg {
 			)),
 			task.name,
 			"normal"
+		);
+		
+		let bar_start = this.chart_pos.clone().add(new Vector2(
+			this.width_sidebar + task.start * this.chart_cell_size.x,
+			offset_y
+		));
+		let bar_offset = (this.task_height - this.task_height * source.style.task_bar_height) / 2;
+		bar_start.y += bar_offset;
+		
+		// Bar
+		this.renderer.addRectangle(
+			bar_start,
+			new Vector2(
+				task.duration * this.chart_cell_size.x,
+				this.task_height * source.style.task_bar_height
+			),
+			source.style.task_bar_border_colour,
+			source.style.task_bar_border_width,
+			task.colour || source.style.task_bar_colour
+		);
+		
+		// Ghost bar
+		let ghost_start = this.chart_pos.clone().add(new Vector2(
+			this.width_sidebar,
+			offset_y
+		));
+		ghost_start.y += bar_offset;
+		
+		this.renderer.addRectangle(
+			ghost_start,
+			new Vector2(
+				task.start * this.chart_cell_size.x,
+				this.task_height * source.style.task_bar_ghost_height
+			),
+			source.style.task_bar_ghost_border_colour,
+			source.style.task_bar_ghost_border_width,
+			task.ghost_colour || source.style.task_bar_ghost_colour
 		);
 	}
 	

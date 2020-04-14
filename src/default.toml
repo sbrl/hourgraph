@@ -1,7 +1,7 @@
 width = 1920
 height = 1080
 
-time_suffix = "d"
+time_interval = "Days"
 
 title = "Time Plan"
 
@@ -18,6 +18,9 @@ divider_major_interval = 4
 divider_sidebar_colour = "hsla(0, 0%, 50%, 0.5)"
 divider_sidebar_width = 3
 
+border_main_colour = "hsla(265, 100%, 20%, 0.75)"
+border_main_width = 6
+
 margin_main = 25
 padding_main = 25
 margin_title_bottom = 25
@@ -25,11 +28,24 @@ margin_title_bottom = 25
 padding_task = 10
 padding_header = 10
 
+# Percentage of the height of a task row that should be taken up by the (centred task bar)
+task_bar_height = 0.75
+task_bar_colour = "hsl(259, 66%, 40%)"
+task_bar_border_colour = "none"
+task_bar_border_width = 0
+
+task_bar_ghost_height = 0.75
+task_bar_ghost_colour = "hsla(259, 66%, 40%, 0.1)"
+task_bar_ghost_border_colour = "none"
+task_bar_ghost_border_width = 0
+
 padding_cell_x = 5
 
 # Percentage of the available width of the *chart* (not the entire image) that should be used to display the task sidebar on the left-hand-side.
 width_sidebar = 0.2
 
-bg_header_colour = "hsla(0, 0%, 65%, 0.5)"
+bg_sidebar_colour = "hsla(0, 0%, 40%, 0.5)"
+bg_sidebar_right_colour = "hsla(0, 0%, 65%, 0.5)"
 bg_task_colour = "hsla(0, 0%, 80%, 0.5)"
 bg_task_colour_alternate = "hsla(0, 0%, 80%, 0.25)"
+bg_header_cells_colour = "hsla(0, 0%, 65%, 0.5)"
