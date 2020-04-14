@@ -1,0 +1,14 @@
+[[task]]
+name = "Pick apples"
+start = 0
+duration = 3
+
+[[task]]
+name = "Make apple juice"
+start = 2
+duration = 2
+
+[[task]]
+name = "Enjoy!"
+start = 4
+duration = 4
