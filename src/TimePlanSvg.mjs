@@ -18,6 +18,14 @@ class TimePlanSvg {
 		
 		// Note that we store this as a string here 'cause we might need multiple independent copies if we're parsing more than 1 source string
 		this.default_toml = default_toml;
+		
+		this.font_size_title = 22;
+		this.font_size_normal = 14;
+		
+		this.css = `
+.title { font: bold ${this.font_size_title}px sans-serif; }
+.normal { font: normal ${this.font_size_normal}px sans-serif; }
+`;
 	}
 	
 	apply_defaults(source) {
@@ -43,17 +51,27 @@ class TimePlanSvg {
 	}
 	
 	render_skeleton(source, result) {
-		console.error(new Vector2(
-			source.width - source.style.border_main*2,
-			source.height - source.style.border_main*2
-		));
+		result.addCSS(this.css);
+		
 		result.addRectangle(
-			new Vector2(source.style.border_main, source.style.border_main),
+			new Vector2(source.style.margin_main, source.style.margin_main),
 			new Vector2(
-				source.width - source.style.border_main*2,
-				source.height - source.style.border_main*2
+				source.width - source.style.margin_main*2,
+				source.height - source.style.margin_main*2
 			)
-		)
+		);
+		let text_offset = source.style.margin_main + source.style.padding_main;
+		result.addText(
+			// The origin of text is the bottom left, apparently
+			new Vector2(text_offset, text_offset + this.font_size_title),
+			source.title,
+			"title"
+		);
+		// result.addRectangle(
+		// 	new Vector2(text_offset, text_offset),
+		// 	new Vector2(5, 5),
+		// 	"red", 0, "blue"
+		// );
 	}
 }
 

@@ -1,3 +1,6 @@
+width = 640
+height = 480
+
 [[task]]
 name = "Pick apples"
 start = 0

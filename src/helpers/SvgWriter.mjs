@@ -57,6 +57,34 @@ class SvgWriter {
 	}
 	
 	/**
+	 * Adds some text to the image.
+	 * @param	{Vector2}	position	The position to display the text at.
+	 * @param	{string}	text		The text to display.
+	 */
+	addText(position, text, classes = []) {
+		let class_str = typeof classes == "string" ? classes : classes.join(" ");
+		this.xml.startElement("text");
+		this.xml.writeAttribute("x", position.x);
+		this.xml.writeAttribute("y", position.y);
+		this.xml.writeAttribute("class", class_str);
+		this.xml.text(text);
+		this.xml.endElement();
+		return this;
+	}
+	
+	/**
+	 * Adds some custom CSS.
+	 * Useful for drawing text.
+	 * @param {string} str The string of CSS to add.
+	 */
+	addCSS(str) {
+		this.xml.startElement("style")
+			.text(str)
+			.endElement();
+		return this;
+	}
+	
+	/**
 	 * Adds a line to the image.
 	 * @param	{Vector2}	start						The start position of the line.
 	 * @param	{Vector2}	end							The end position of the line.
@@ -130,13 +158,13 @@ class SvgWriter {
 	 * @param	{float}		strokeWidth	The line width to use when drawing.
 	 * @return	{this}
 	 */
-	addRectangle(position, size, strokeStyle = "red", strokeWidth = 3) {
+	addRectangle(position, size, strokeStyle = "red", strokeWidth = 3, fill = "none") {
 		this.xml.startElement("rect");
 		this.xml.writeAttribute("x", `${position.x}${this.unitSuffix}`);
 		this.xml.writeAttribute("y", `${position.y}${this.unitSuffix}`);
 		this.xml.writeAttribute("width", `${size.x}${this.unitSuffix}`);
 		this.xml.writeAttribute("height", `${size.y}${this.unitSuffix}`);
-		this.xml.writeAttribute("fill", "none");
+		this.xml.writeAttribute("fill", fill);
 		this.xml.writeAttribute("stroke", strokeStyle);
 		this.xml.writeAttribute("stroke-width", strokeWidth.toString());
 		this.xml.endElement();

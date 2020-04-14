@@ -3,6 +3,7 @@ height = 1080
 
 time_suffix = "d"
 
+title = "Time Plan"
 
 [style]
 # All of these are optional
@@ -13,4 +14,5 @@ divider_minor_width = 2 # Pixels
 divider_major_colour = "#aaaaaa"
 divider_major_width = 5 # Pixels
 
-border_main = 25
+margin_main = 25
+padding_main = 25
