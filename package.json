@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/sbrl/time-plan-svg/issues"
   },
-  "homepage": "https://github.com/sbrl/time-plan-svg#readme"
+  "homepage": "https://github.com/sbrl/time-plan-svg#readme",
+  "dependencies": {
+    "@iarna/toml": "^2.2.3",
+    "applause-cli": "^1.2.1",
+    "xml-writer": "^1.7.0"
+  }
 }
