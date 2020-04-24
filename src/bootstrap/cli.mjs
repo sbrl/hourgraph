@@ -37,7 +37,7 @@ export default async function() {
             break;
     }
     if(input == null) {
-        console.log(`${a.fred}${a.hicol}Error: Failed to read the input file (does it exist and do we have permission to read it?).${a.reset}`);
+        console.log(`${a.fred}${a.hicol}Error: Failed to read the input file (does it exist and do we have permission to read it?). Try --help for more information.${a.reset}`);
         process.exit(1);
     }
     

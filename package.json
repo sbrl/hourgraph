@@ -1,25 +1,34 @@
 {
-  "name": "time-plan-svg",
-  "version": "1.0.0",
-  "description": "Time plan / gantt chart SVG generator",
-  "main": "src/index.mjs",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sbrl/time-plan-svg.git"
-  },
-  "author": "Starbeamrainbowlabs",
-  "license": "MPL-2.0",
-  "bugs": {
-    "url": "https://github.com/sbrl/time-plan-svg/issues"
-  },
-  "homepage": "https://github.com/sbrl/time-plan-svg#readme",
-  "dependencies": {
-    "@iarna/toml": "^2.2.3",
-    "applause-cli": "^1.2.1",
-    "chroma-js": "^2.1.0",
-    "xml-writer": "^1.7.0"
-  }
+	"name": "time-plan-svg",
+	"version": "1.0.0",
+	"description": "Time plan / gantt chart SVG generator",
+	"main": "src/index.mjs",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sbrl/time-plan-svg.git"
+	},
+	"author": "Starbeamrainbowlabs",
+	"license": "MPL-2.0",
+	"bugs": {
+		"url": "https://github.com/sbrl/time-plan-svg/issues"
+	},
+	"homepage": "https://github.com/sbrl/time-plan-svg#readme",
+	"dependencies": {
+		"@iarna/toml": "^2.2.3",
+		"applause-cli": "^1.2.1",
+		"chroma-js": "^2.1.0",
+		"xml-writer": "^1.7.0"
+	},
+	"files": [
+		"src/",
+		"LICENSE",
+        "package-lock.json",
+		"package.json"
+	],
+	"bin": {
+		"svg-time-plan": "./src/index.mjs"
+	}
 }
