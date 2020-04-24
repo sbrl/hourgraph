@@ -1,7 +1,7 @@
 {
-	"name": "time-plan-svg",
+	"name": "hourgraph",
 	"version": "1.0.0",
-	"description": "Time plan / gantt chart SVG generator",
+	"description": "SVG time plan / gantt chart generator",
 	"main": "src/index.mjs",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,15 @@
 		"type": "git",
 		"url": "git+https://github.com/sbrl/time-plan-svg.git"
 	},
+    "keywords": [
+        "gantt",
+        "chart",
+        "svg",
+        "generator",
+        "bin",
+        "time",
+        "plan"
+    ],
 	"author": "Starbeamrainbowlabs",
 	"license": "MPL-2.0",
 	"bugs": {
