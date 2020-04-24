@@ -59,7 +59,7 @@ colour		| string	| no		| The colour of the bar on the graph for this task. Overr
 ghost_colour| string	| no		| Specifies the colour of the ghost bar from the left-hand side up to the actual bar itself. Overrides the global value specified in the `[style]` section.
 
 ### CLI
-_If you've installed `hourgraph` locally, substitute all instances of `hourgraph` for `path/to/node_modules/.bin/hourgraph` (basically the path to the `scg-time-plan` entry point)._
+_If you've installed `hourgraph` locally, substitute all instances of `hourgraph` for `path/to/node_modules/.bin/hourgraph` (basically the path to the `hourgraph` entry point)._
 
 Once you've got your definition file written, you can now call _hourgraph_ to render it. By default, _hourgrah_ reads and writes from and to the standard input and output:
 
