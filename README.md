@@ -1,10 +1,10 @@
-# svg-time-plan
+# hourgraph
 > Creates an SVG from a TOML definition of a time plan / gantt chart
 
 Originally written for my PhD panel 1 topic project analysis report, as I realised that not only have I manually creates a number of these, but I'm going to have to create a bunch more in the future....
 
  - **Current version:** ![current npm version - see the GitHub releases](https://img.shields.io/npm/v/terrain50-cli)
- - **Changelog:** https://github.com/sbrl/svg-time-plan/blob/master/Changelog.md
+ - **Changelog:** https://github.com/sbrl/hourgraph/blob/master/Changelog.md
 
 
 ## Installation
@@ -17,13 +17,13 @@ sudo npm install --global
 Or locally:
 
 ```bash
-npm install svg-time-plan
+npm install hourgraph
 ```
 
 ## Usage
-_If you've installed `svg-time-plan` locally, substitute all instances of `svg-time-plan` for `path/to/node_modules/.bin/svg-time-plan` (basically the path to the `scg-time-plan` entry point)._
+_If you've installed `hourgraph` locally, substitute all instances of `hourgraph` for `path/to/node_modules/.bin/hourgraph` (basically the path to the `scg-time-plan` entry point)._
 
-svg-time-plan takes a [TOML file](https://github.com/toml-lang/toml) as input. Examples files can be found in the [examples directory](https://github.com/sbrl/svg-time-plan/tree/master/examples). In short, the format of a valid time plan file is as follows:
+hourgraph takes a [TOML file](https://github.com/toml-lang/toml) as input. Examples files can be found in the [examples directory](https://github.com/sbrl/hourgraph/tree/master/examples). In short, the format of a valid time plan file is as follows:
 
 ```toml
 # Specify global options here
@@ -43,7 +43,7 @@ duration = 2
 # Optional section, allows customisation of the visual style of the resulting svg
 [style]
 # Styling options go in here. See default.toml in the src/ directory for more information as to supported properties here.
-# Link: https://github.com/sbrl/svg-time-plan/blob/master/src/default.toml
+# Link: https://github.com/sbrl/hourgraph/blob/master/src/default.toml
 
 ```
 
@@ -60,7 +60,7 @@ ghost_colour| string	| no		| Specifies the colour of the ghost bar from the left
 
 ## Read-world use
  - I'm using it in reports for my PhD in Computer Science!
- - _(Are you using this project? Get in touch by [opening an issue](https://github.com/sbrl/svg-time-plan/issues/new))_
+ - _(Are you using this project? Get in touch by [opening an issue](https://github.com/sbrl/hourgraph/issues/new))_
 
 
 ## Contributing

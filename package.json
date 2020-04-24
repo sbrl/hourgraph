@@ -8,7 +8,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/sbrl/time-plan-svg.git"
+		"url": "git+https://github.com/sbrl/hourgraph.git"
 	},
     "keywords": [
         "gantt",
@@ -22,9 +22,9 @@
 	"author": "Starbeamrainbowlabs",
 	"license": "MPL-2.0",
 	"bugs": {
-		"url": "https://github.com/sbrl/time-plan-svg/issues"
+		"url": "https://github.com/sbrl/hourgraph/issues"
 	},
-	"homepage": "https://github.com/sbrl/time-plan-svg#readme",
+	"homepage": "https://github.com/sbrl/hourgraph#readme",
 	"dependencies": {
 		"@iarna/toml": "^2.2.3",
 		"applause-cli": "^1.2.1",
@@ -38,6 +38,6 @@
 		"package.json"
 	],
 	"bin": {
-		"svg-time-plan": "./src/index.mjs"
+		"hourgraph": "./src/index.mjs"
 	}
 }
