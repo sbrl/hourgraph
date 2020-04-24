@@ -20,10 +20,12 @@ Or locally:
 npm install hourgraph
 ```
 
-## Usage
-_If you've installed `hourgraph` locally, substitute all instances of `hourgraph` for `path/to/node_modules/.bin/hourgraph` (basically the path to the `scg-time-plan` entry point)._
 
-hourgraph takes a [TOML file](https://github.com/toml-lang/toml) as input. Examples files can be found in the [examples directory](https://github.com/sbrl/hourgraph/tree/master/examples). In short, the format of a valid time plan file is as follows:
+## Usage
+There are 2 parts to using _hourgraph_. First, you need a configuration / definition file for your time plan / gantt chart. Then, you need to call the CLI to render it to SVG (PNG is currently _not_ supported, but Inkscape can be used to convert - see below).
+
+### Definition file
+_hourgraph_ takes a [TOML file](https://github.com/toml-lang/toml) as input. Examples files can be found in the [examples directory](https://github.com/sbrl/hourgraph/tree/master/examples). In short, the format of a valid time plan file is as follows:
 
 ```toml
 # Specify global options here
@@ -44,7 +46,6 @@ duration = 2
 [style]
 # Styling options go in here. See default.toml in the src/ directory for more information as to supported properties here.
 # Link: https://github.com/sbrl/hourgraph/blob/master/src/default.toml
-
 ```
 
 Detailed explanation of the properties on a `[[task]]`:
@@ -56,6 +57,42 @@ start		| number	| yes		| The point at which the task starts
 duration	| number	| yes		| The number of units which the task lasts for.
 colour		| string	| no		| The colour of the bar on the graph for this task. Overrides the global value specified in the `[style]` section.
 ghost_colour| string	| no		| Specifies the colour of the ghost bar from the left-hand side up to the actual bar itself. Overrides the global value specified in the `[style]` section.
+
+### CLI
+_If you've installed `hourgraph` locally, substitute all instances of `hourgraph` for `path/to/node_modules/.bin/hourgraph` (basically the path to the `scg-time-plan` entry point)._
+
+Once you've got your definition file written, you can now call _hourgraph_ to render it. By default, _hourgrah_ reads and writes from and to the standard input and output:
+
+```bash
+hourgraph <path/to/file.toml >path/to/file.svg
+```
+
+However, the `--input` and `--output` flags can be used to specify filenames to read from and/or write to instead:
+
+```bash
+hourgraph --input path/to/file.toml --output path/to/file.svg
+```
+
+Help text can be displayed using the `--help` argument:
+
+```bash
+hourgraph --help
+```
+
+Once you've got your SVG, you're done! If you'd prefer a PNG though, you can use the [Inkscape](https://inkscape.org/) CLI to convert it:
+
+```bash
+inkscape -e path/to/output.png path/to/file.svg
+```
+
+You can also specify a custom width or height to render to (maintaining aspect ratio):
+
+```bash
+# Specify the width:
+inkscape -w 3840 -e path/to/output.png path/to/file.svg
+# Specify the height:
+inkscape -h 2160 -e path/to/output.png path/to/file.svg
+```
 
 
 ## Read-world use
