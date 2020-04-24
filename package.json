@@ -26,8 +26,8 @@
 	},
 	"homepage": "https://github.com/sbrl/hourgraph#readme",
 	"dependencies": {
-		"@iarna/toml": "^2.2.3",
-		"applause-cli": "^1.2.1",
+		"@iarna/toml": "^2.2.5",
+		"applause-cli": "^1.2.2",
 		"chroma-js": "^2.1.0",
 		"xml-writer": "^1.7.0"
 	},
