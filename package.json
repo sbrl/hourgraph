@@ -10,15 +10,15 @@
 		"type": "git",
 		"url": "git+https://github.com/sbrl/hourgraph.git"
 	},
-    "keywords": [
-        "gantt",
-        "chart",
-        "svg",
-        "generator",
-        "bin",
-        "time",
-        "plan"
-    ],
+	"keywords": [
+		"gantt",
+		"chart",
+		"svg",
+		"generator",
+		"bin",
+		"time",
+		"plan"
+	],
 	"author": "Starbeamrainbowlabs",
 	"license": "MPL-2.0",
 	"bugs": {
@@ -34,7 +34,7 @@
 	"files": [
 		"src/",
 		"LICENSE",
-        "package-lock.json",
+		"package-lock.json",
 		"package.json"
 	],
 	"bin": {
