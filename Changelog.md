@@ -1,9 +1,13 @@
 # Changelog
 
 
-## v1.0.1
+## v1.0.2 - 6th October 2020
  - Show error message if no tasks are defined
 
 
-## v1.0.0
+## v1.0.1 - 24th April 2020
+ - Initial (proper) release!
+
+
+## v1.0.0 - April 2020
 Initial release
