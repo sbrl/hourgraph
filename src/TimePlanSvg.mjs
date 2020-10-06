@@ -43,6 +43,17 @@ class TimePlanSvg {
 		let source = this.apply_defaults(TOML.parse(source_str));
 		console.error(`Rendering for`, source);
 		
+		if(!(source.task instanceof Array)) {
+			console.error(`Error: No tasks defined in specified definition file.`);
+			console.error(`Specify a task like this:
+
+[[task]]
+name = "Task name here"
+start = 0 # Start offset
+duration = 0.5 #Duration`);
+			process.exit(1);
+		}
+		
 		this.renderer = new SvgWriter(
 			`${source.width}px`, `${source.height}px`,
 			new Rectangle(0, 0, source.width, source.height),
