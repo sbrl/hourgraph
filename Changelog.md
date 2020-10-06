@@ -11,7 +11,7 @@ Install or update using npm:
 sudo npm install --global hourgraph
 #  Local:
 npm install --save hourgraph
-``
+```
 
 --------
 
