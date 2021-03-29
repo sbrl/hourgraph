@@ -82,7 +82,7 @@ hourgraph --help
 Once you've got your SVG, you're done! If you'd prefer a PNG though, you can use the [Inkscape](https://inkscape.org/) CLI to convert it:
 
 ```bash
-inkscape -e path/to/output.png path/to/file.svg
+inkscape -o path/to/output.png path/to/file.svg
 ```
 
 You can also specify a custom width or height to render to (maintaining aspect ratio):
