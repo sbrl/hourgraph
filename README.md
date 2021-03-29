@@ -11,7 +11,7 @@ Originally written for my PhD panel 1 topic project analysis report, as I realis
 Install with `npm`:
 
 ```bash
-sudo npm install --global
+sudo npm install --global hourgraph
 ```
 
 Or locally:
