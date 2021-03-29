@@ -28,7 +28,7 @@ export default async function() {
     let input = null;
     switch(args.input) {
         case "-":
-            input = await fs.promises.readFile(0, "utf-8");
+            input = fs.readFileSync(0, "utf-8");
             break;
         default:
             if(!fs.existsSync(args.input))
