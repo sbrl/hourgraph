@@ -16,6 +16,10 @@ npm install --save hourgraph
 --------
 
 
+## v1.0.3 - unreleased
+ - Fix reading from stdin
+
+
 ## v1.0.2 - 6th October 2020
  - Show error message if no tasks are defined
 
