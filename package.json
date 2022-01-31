@@ -1,6 +1,6 @@
 {
 	"name": "hourgraph",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "SVG time plan / gantt chart generator",
 	"main": "src/index.mjs",
 	"scripts": {
