@@ -18,6 +18,7 @@ npm install --save hourgraph
 
 ## v1.0.3 - unreleased
  - Fix reading from stdin
+ - Update dependencies
 
 
 ## v1.0.2 - 6th October 2020
